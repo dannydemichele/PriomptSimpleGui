@@ -61,8 +61,14 @@ function generateText() {
 }
 
 
-   prompt= Put Your Text Here for ${output} with company name:"""Put Your Text Here for ${companyName}""" product name:"""Put Your Text Here for ${productName}""" promo:"""Put Your Text Here for ${promo}""" target audience:"""Put Your Text Here for ${audience}""" tone of article:"""Put Your Text Here for ${tone}""" words count:"""Put Your Text Here for ${word}"""
-    `
+   prompt=`
+        Generate text for ${output} with
+        company name:"""${companyName}"""
+        product name:"""${productName}"""
+        promo:"""${promo}"""
+        target audience:"""${audience}"""
+        tone of article:"""${tone}"""
+        words count:"""${word}"""
 
 
 
