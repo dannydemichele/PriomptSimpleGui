@@ -99,17 +99,18 @@ function validateContactForm() {
 
 
 prompt=`
-Ignore All Previous instructions before this one. You are an expert email writer, specifically for the target audience identified below. You are using your two decades of experience to create a a promomotional newsletter. I have provided important information below to utilize. 
-Generate an email copy using the information below. You are not required to input as shown, this is just to give you an idea of the things to write a better email${output} with
-company name:"${companyName}"
-product name:"${productName}"
-promo:"${promo}"
-target audience:"${audience}"
-tone of article:"${tone}"
-words count:"${word}"
-`
+        Generate text for ${output} with
+        company name:"""${companyName}"""
+        product name:"""${productName}"""
+        promo:"""${promo}"""
+        target audience:"""${audience}"""
+        tone of article:"""${tone}"""
+        words count:"""${word}"""
+    `
 
-prompt = JSON.parse(JSON.stringify(prompt));
+
+
+    prompt = JSON.parse(JSON.stringify(prompt));
 
 
 
