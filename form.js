@@ -71,7 +71,7 @@ function generateText() {
         words count:"""${word}"""
 
 
-
+prompt = JSON.parse(JSON.stringify(prompt));
 
 
 
