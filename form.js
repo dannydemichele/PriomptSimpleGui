@@ -8,15 +8,69 @@ xhr.onreadystatechange = function () {
 };
 xhr.send();
 
-function generateText() {
-    var selectElement = document.querySelector('#select');
-    var output = selectElement.value;
+function validateContactForm() {
+    var valid = true;
+    $(".info").html("");
+    $(".input-field").css('border', '#e0dfdf 1px solid');
+    $("#contact-company-name").removeClass("error-field");
+    $("#contact-product-name").removeClass("error-field");
+    $("#contact-promo").removeClass("error-field");
+    $("#contact-audience").removeClass("error-field");
+    $("#contact-tone").removeClass("error-field");
+    $("#contact-word").removeClass("error-field");
+
     var companyName = $("#contact-company-name").val();
+    console.log(companyName);
     var productName = $("#contact-product-name").val();
     var promo = $("#contact-promo").val();
     var audience = $("#contact-audience").val();
     var tone = $("#contact-tone").val();
     var word = $("#contact-word").val();
+
+    var selectElement = document.querySelector('#select');
+    var output = selectElement.value;
+
+    if (companyName == "") {
+        $("#companyName-info").html("Required.");
+        $("#contact-company-name").css('border', '#e66262 1px solid');
+        $("#contact-company-name").addClass("error-field");
+        valid = false;
+    }
+    if (productName == "") {
+        $("#productName-info").html("Required.");
+        $("#contact-product-name").css('border', '#e66262 1px solid');
+        $("#contact-product-name").addClass("error-field");
+        valid = false;
+    }
+    if (promo == "") {
+        $("#promo-info").html("Required.");
+        $("#contact-promo").css('border', '#e66262 1px solid');
+        $("#contact-promo").addClass("error-field");
+        valid = false;
+    }
+    if (audience == "") {
+        $("#audience-info").html("Required.");
+        $("#contact-audience").css('border', '#e66262 1px solid');
+        $("#contact-audience").addClass("error-field");
+        valid = false;
+    }
+
+    if (tone == "") {
+        $("#tone-info").html("Required.");
+        $("#contact-tone").css('border', '#e66262 1px solid');
+        $("#contact-tone").addClass("error-field");
+        valid = false;
+    }
+    if ($('input[name="contact-subject"]:checked').length == 0) {
+        $("#subject-info").html("Required.");
+        valid = false;
+    }
+    if (word == "") {
+        $("#word-info").html("Required.");
+        $("#contact-word").css('border', '#e66262 1px solid');
+        $("#contact-word").addClass("error-field");
+        valid = false;
+    }
 
     var url = "https://api.openai.com/v1/completions";
 
@@ -43,33 +97,17 @@ function generateText() {
         }
     };
 
-    var data = JSON.stringify({
-        prompt: `Generate text for ${output} with
-        company name:"""${companyName}"""
-        product name:"""${productName}"""
-        promo:"""${promo}"""
-        target audience:"""${audience}"""
-        tone of article:"""${tone}"""
-        words count:"""${word}"""`,
-        max_tokens: word,
-        n: 1,
-        stop: "",
-        temperature: 0.5,
-    });
 
-    xhr.send(data);
-}
-
-
-   prompt=`
-        Generate text for ${output} with
-        company name:"""${companyName}"""
-        product name:"""${productName}"""
-        promo:"""${promo}"""
-        target audience:"""${audience}"""
-        tone of article:"""${tone}"""
-        words count:"""${word}"""
-
+prompt=`
+Ignore All Previous instructions before this one. You are an expert email writer, specifically for the target audience identified below. You are using your two decades of experience to create a a promomotional newsletter. I have provided important information below to utilize. 
+Generate an email copy using the information below. You are not required to input as shown, this is just to give you an idea of the things to write a better email${output} with
+company name:"${companyName}"
+product name:"${productName}"
+promo:"${promo}"
+target audience:"${audience}"
+tone of article:"${tone}"
+words count:"${word}"
+`
 
 prompt = JSON.parse(JSON.stringify(prompt));
 
