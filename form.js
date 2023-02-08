@@ -66,7 +66,7 @@ function generateText() {
 
 
 
-    prompt = JSON.parse(JSON.stringify(productName));
+
 
 
     var data = {
