@@ -8,69 +8,15 @@ xhr.onreadystatechange = function () {
 };
 xhr.send();
 
-function validateContactForm() {
-    var valid = true;
-    $(".info").html("");
-    $(".input-field").css('border', '#e0dfdf 1px solid');
-    $("#contact-company-name").removeClass("error-field");
-    $("#contact-product-name").removeClass("error-field");
-    $("#contact-promo").removeClass("error-field");
-    $("#contact-audience").removeClass("error-field");
-    $("#contact-tone").removeClass("error-field");
-    $("#contact-word").removeClass("error-field");
-
+function generateText() {
+    var selectElement = document.querySelector('#select');
+    var output = selectElement.value;
     var companyName = $("#contact-company-name").val();
-    console.log(companyName);
     var productName = $("#contact-product-name").val();
     var promo = $("#contact-promo").val();
     var audience = $("#contact-audience").val();
     var tone = $("#contact-tone").val();
     var word = $("#contact-word").val();
-
-    var selectElement = document.querySelector('#select');
-    var output = selectElement.value;
-
-    if (companyName == "") {
-        $("#companyName-info").html("Required.");
-        $("#contact-company-name").css('border', '#e66262 1px solid');
-        $("#contact-company-name").addClass("error-field");
-        valid = false;
-    }
-    if (productName == "") {
-        $("#productName-info").html("Required.");
-        $("#contact-product-name").css('border', '#e66262 1px solid');
-        $("#contact-product-name").addClass("error-field");
-        valid = false;
-    }
-    if (promo == "") {
-        $("#promo-info").html("Required.");
-        $("#contact-promo").css('border', '#e66262 1px solid');
-        $("#contact-promo").addClass("error-field");
-        valid = false;
-    }
-    if (audience == "") {
-        $("#audience-info").html("Required.");
-        $("#contact-audience").css('border', '#e66262 1px solid');
-        $("#contact-audience").addClass("error-field");
-        valid = false;
-    }
-
-    if (tone == "") {
-        $("#tone-info").html("Required.");
-        $("#contact-tone").css('border', '#e66262 1px solid');
-        $("#contact-tone").addClass("error-field");
-        valid = false;
-    }
-    if ($('input[name="contact-subject"]:checked').length == 0) {
-        $("#subject-info").html("Required.");
-        valid = false;
-    }
-    if (word == "") {
-        $("#word-info").html("Required.");
-        $("#contact-word").css('border', '#e66262 1px solid');
-        $("#contact-word").addClass("error-field");
-        valid = false;
-    }
 
     var url = "https://api.openai.com/v1/completions";
 
@@ -96,6 +42,23 @@ function validateContactForm() {
                 response["choices"][0]["text"];
         }
     };
+
+    var data = JSON.stringify({
+        prompt: `Generate text for ${output} with
+        company name:"""${companyName}"""
+        product name:"""${productName}"""
+        promo:"""${promo}"""
+        target audience:"""${audience}"""
+        tone of article:"""${tone}"""
+        words count:"""${word}"""`,
+        max_tokens: word,
+        n: 1,
+        stop: "",
+        temperature: 0.5,
+    });
+
+    xhr.send(data);
+}
 
 
    prompt= Put Your Text Here for ${output} with company name:"""Put Your Text Here for ${companyName}""" product name:"""Put Your Text Here for ${productName}""" promo:"""Put Your Text Here for ${promo}""" target audience:"""Put Your Text Here for ${audience}""" tone of article:"""Put Your Text Here for ${tone}""" words count:"""Put Your Text Here for ${word}"""
