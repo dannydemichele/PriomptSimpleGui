@@ -107,7 +107,7 @@ You are an expert email writer.
 
 You are using your two decades of experience in to create the content for a landing page that sells the following product: """${productName}"""
 
-I have outlined what is will be needed to complete this landing page  in "Content Needed" Section below. I have created needs in the "Facts" below, as well, take inspiration from the content in "Research" section below.
+I have outlined what is will be needed to complete this landing page  in Content Needed Section below. I have created needs in the Facts section below, as well, take inspiration from the content in Research section below.
 
 
 Content Needed:
