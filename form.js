@@ -98,20 +98,30 @@ function validateContactForm() {
     };
 
 
-prompt=`
-        Generate text for ${output} with
-        company name:"""${companyName}"""
-        product name:"""${productName}"""
-        promo:"""${promo}"""
-        target audience:"""${audience}"""
-        tone of article:"""${tone}"""
-        words count:"""${word}"""
-    `
+
+prompt=
+
+Ignore All Previous instructions before this one.
+
+You are an expert email writer.
+
+You are using your two decades of experience in to create the content for a landing page that sells the following product: """${productName}"""
+
+I have outlined what is will be needed to complete this landing page  in "Content Needed" Section below. I have created needs in the "Facts" below, as well, take inspiration from the content in "Research" section below.
 
 
+Content Needed:
+1. Headline option
+2. Introduction
+4. An Offer area
+6. Closing section
 
-    prompt = JSON.parse(JSON.stringify(prompt));
 
+Facts:
+1. Please write +100 or -100 of the following word count: """${word}"""
+2. Tone / Style you should write in: """${tone}"""
+3. You are writing to the following audience. Do not mention the audience by name, just make the content compelling to them: """${audience}"""
+4. Please use the following promotion within the content: """${promo}"""
 
 
     var data = {
